@@ -14,7 +14,7 @@ Usage for Java Card SDK 3.0.x:
     <plugin>
         <groupId>com.github.code2358</groupId>
         <artifactId>jcdk-maven-plugin</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
         <configuration>
             <jcdkHome>/path/to/javacard-sdk3</jcdkHome>
             <jcdkVersion>3.0.x</jcdkVersion>
@@ -41,7 +41,7 @@ Usage for Java Card SDK 2.2.x:
     <plugin>
         <groupId>com.github.code2358</groupId>
         <artifactId>jcdk-maven-plugin</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
         <configuration>
             <jcdkHome>/path/to/javacard-sdk2</jcdkHome>
             <jcdkVersion>2.2.x</jcdkVersion>
@@ -67,7 +67,7 @@ If a use case is not covered by the default parameters of this plugin it is poss
     <plugin>
         <groupId>com.github.code2358</groupId>
         <artifactId>jcdk-maven-plugin</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
         <configuration>
             <jcdkHome>/path/to/javacard-sdk3</jcdkHome>
             <jcdkVersion>3.0.x</jcdkVersion>
