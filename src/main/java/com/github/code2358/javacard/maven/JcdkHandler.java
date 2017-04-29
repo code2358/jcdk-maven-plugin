@@ -61,7 +61,8 @@ public class JcdkHandler {
                     .appletClass(jcdkHandlerParameter.appletClass())
                     .appletId(jcdkHandlerParameter.appletId())
                     .appletVersion(jcdkHandlerParameter.appletVersion())
-                    .supportInt32(jcdkHandlerParameter.supportInt32());
+                    .supportInt32(jcdkHandlerParameter.supportInt32())
+                    .exportPath(jcdkHandlerParameter.exportPaths());
 
             try (PrintWriter writer = new PrintWriter(new FileWriter(jcdkHandlerParameter.jcdkConfiguration().toFile()))) {
                 writer.print(builder.build());

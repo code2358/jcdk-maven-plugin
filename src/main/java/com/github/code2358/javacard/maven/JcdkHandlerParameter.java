@@ -21,6 +21,7 @@ package com.github.code2358.javacard.maven;
  */
 
 import java.nio.file.Path;
+import java.util.List;
 
 public interface JcdkHandlerParameter {
     Path buildDirectory();
@@ -42,4 +43,6 @@ public interface JcdkHandlerParameter {
     String appletVersion();
 
     boolean supportInt32();
+
+    List<Path> exportPaths();
 }

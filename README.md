@@ -25,6 +25,12 @@ Usage for Java Card SDK 3.0.x:
             
             <!-- Optional: support for Int32 -->
             <!-- <supportInt32>true</supportInt32> -->
+            
+            <!-- Optional: exports of other applets -->
+            <!-- exportPaths>
+              <param>/some-path/export1</param>
+              <param>/some-path/export2</param>
+            </exportPaths -->
         </configuration>
         <executions>
             <execution>

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.code2358</groupId>
     <artifactId>jcdk-maven-plugin</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>maven-plugin</packaging>
 
     <prerequisites>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>com.github.code2358</groupId>
             <artifactId>jcdk-wrapper</artifactId>
-            <version>0.0.2</version>
+            <version>0.2.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>

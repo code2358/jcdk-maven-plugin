@@ -25,6 +25,11 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 @Mojo(name = "packageApplet")
 public class JcdkMojo extends AbstractMojo {
 
@@ -55,6 +60,9 @@ public class JcdkMojo extends AbstractMojo {
     @Parameter(defaultValue = "false")
     private boolean supportInt32;
 
+    @Parameter
+    private List<String> exportPaths;
+
     @Override
     public void execute() throws MojoExecutionException {
         JcdkHandlerParameterBuilder jcdkHandlerParameterBuilder = JcdkHandlerParameters.newBuilder();
@@ -70,6 +78,15 @@ public class JcdkMojo extends AbstractMojo {
         jcdkHandlerParameterBuilder.appletId(appletId);
         jcdkHandlerParameterBuilder.appletVersion(appletVersion);
         jcdkHandlerParameterBuilder.supportInt32(supportInt32);
+
+        if (exportPaths != null) {
+            List<Path> exportPathsList = new ArrayList<>();
+            for (String exportPath : exportPaths) {
+                exportPathsList.add(Paths.get(exportPath));
+                getLog().info("PATH: " + exportPath);
+            }
+            jcdkHandlerParameterBuilder.exportPaths(exportPathsList);
+        }
 
         JcdkHandlerParameter jcdkHandlerParameter = jcdkHandlerParameterBuilder.build();
 

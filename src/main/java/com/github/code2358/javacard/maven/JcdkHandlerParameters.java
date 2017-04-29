@@ -22,6 +22,8 @@ package com.github.code2358.javacard.maven;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class JcdkHandlerParameters {
@@ -41,6 +43,7 @@ class JcdkHandlerParameterBuilder {
     private String appletId;
     private String appletVersion;
     private boolean supportInt32;
+    private List<Path> exportPaths = new ArrayList<>();
 
     public JcdkHandlerParameterBuilder buildDirectory(String buildDirectory) {
         this.buildDirectory = Objects.requireNonNull(buildDirectory);
@@ -87,6 +90,12 @@ class JcdkHandlerParameterBuilder {
         return this;
     }
 
+    public JcdkHandlerParameterBuilder exportPaths(List<Path> exportPaths) {
+        Objects.requireNonNull(exportPaths);
+        this.exportPaths.addAll(exportPaths);
+        return this;
+    }
+
     public JcdkHandlerParameter build() {
         JcdkHandlerParameterImpl impl = new JcdkHandlerParameterImpl();
 
@@ -99,6 +108,9 @@ class JcdkHandlerParameterBuilder {
         impl.appletId = appletId;
         impl.appletVersion = appletVersion;
         impl.supportInt32 = supportInt32;
+
+        impl.exportPaths = new ArrayList<>();
+        impl.exportPaths.addAll(exportPaths);
 
         return impl;
     }
@@ -113,6 +125,7 @@ class JcdkHandlerParameterBuilder {
         private String appletId;
         private String appletVersion;
         private boolean supportInt32;
+        private List<Path> exportPaths;
 
         @Override
         public Path buildDirectory() {
@@ -162,6 +175,11 @@ class JcdkHandlerParameterBuilder {
         @Override
         public boolean supportInt32() {
             return supportInt32;
+        }
+
+        @Override
+        public List<Path> exportPaths() {
+            return exportPaths;
         }
     }
 }
