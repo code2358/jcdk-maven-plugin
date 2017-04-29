@@ -23,6 +23,7 @@ package com.github.code2358.javacard.maven;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,10 +35,10 @@ public class JcdkHandlerParameters {
 }
 
 class JcdkHandlerParameterBuilder {
-    private String buildDirectory;
-    private String classesDirectory;
-    private String jcdkConfiguration;
-    private String jcdkHome;
+    private Path buildDirectory;
+    private Path classesDirectory;
+    private Path jcdkConfiguration;
+    private Path jcdkHome;
     private String jcdkVersion;
     private String appletClass;
     private String appletId;
@@ -46,22 +47,26 @@ class JcdkHandlerParameterBuilder {
     private List<Path> exportPaths = new ArrayList<>();
 
     public JcdkHandlerParameterBuilder buildDirectory(String buildDirectory) {
-        this.buildDirectory = Objects.requireNonNull(buildDirectory);
+        Objects.requireNonNull(buildDirectory);
+        this.buildDirectory = Paths.get(buildDirectory);
         return this;
     }
 
     public JcdkHandlerParameterBuilder classesDirectory(String classesDirectory) {
-        this.classesDirectory = Objects.requireNonNull(classesDirectory);
+        Objects.requireNonNull(classesDirectory);
+        this.classesDirectory = Paths.get(classesDirectory);
         return this;
     }
 
     public JcdkHandlerParameterBuilder jcdkConfiguration(String jcdkConfiguration) {
-        this.jcdkConfiguration = Objects.requireNonNull(jcdkConfiguration);
+        Objects.requireNonNull(jcdkConfiguration);
+        this.jcdkConfiguration = Paths.get(jcdkConfiguration);
         return this;
     }
 
     public JcdkHandlerParameterBuilder jcdkHome(String jcdkHome) {
-        this.jcdkHome = Objects.requireNonNull(jcdkHome);
+        Objects.requireNonNull(jcdkHome);
+        this.jcdkHome = Paths.get(jcdkHome);
         return this;
     }
 
@@ -97,35 +102,33 @@ class JcdkHandlerParameterBuilder {
     }
 
     public JcdkHandlerParameter build() {
-        JcdkHandlerParameterImpl impl = new JcdkHandlerParameterImpl();
-
-        impl.buildDirectory = Paths.get(buildDirectory);
-        impl.classesDirectory = Paths.get(classesDirectory);
-        impl.jcdkConfiguration = Paths.get(jcdkConfiguration);
-        impl.jcdkHome = Paths.get(jcdkHome);
-        impl.jcdkVersion = jcdkVersion;
-        impl.appletClass = appletClass;
-        impl.appletId = appletId;
-        impl.appletVersion = appletVersion;
-        impl.supportInt32 = supportInt32;
-
-        impl.exportPaths = new ArrayList<>();
-        impl.exportPaths.addAll(exportPaths);
-
-        return impl;
+        return new JcdkHandlerParameterImpl(this);
     }
 
     private class JcdkHandlerParameterImpl implements JcdkHandlerParameter {
-        private Path buildDirectory;
-        private Path classesDirectory;
-        private Path jcdkConfiguration;
-        private Path jcdkHome;
-        private String jcdkVersion;
-        private String appletClass;
-        private String appletId;
-        private String appletVersion;
-        private boolean supportInt32;
-        private List<Path> exportPaths;
+        private final Path buildDirectory;
+        private final Path classesDirectory;
+        private final Path jcdkConfiguration;
+        private final Path jcdkHome;
+        private final String jcdkVersion;
+        private final String appletClass;
+        private final String appletId;
+        private final String appletVersion;
+        private final boolean supportInt32;
+        private final List<Path> exportPaths;
+        
+        public JcdkHandlerParameterImpl(JcdkHandlerParameterBuilder jcdkHandlerParameterBuilder) {
+            this.buildDirectory = jcdkHandlerParameterBuilder.buildDirectory;
+            this.classesDirectory = jcdkHandlerParameterBuilder.classesDirectory;
+            this.jcdkConfiguration = jcdkHandlerParameterBuilder.jcdkConfiguration;
+            this.jcdkHome = jcdkHandlerParameterBuilder.jcdkHome;
+            this.jcdkVersion = jcdkHandlerParameterBuilder.jcdkVersion;
+            this.appletClass = jcdkHandlerParameterBuilder.appletClass;
+            this.appletId = jcdkHandlerParameterBuilder.appletId;
+            this.appletVersion = jcdkHandlerParameterBuilder.appletVersion;
+            this.supportInt32 = jcdkHandlerParameterBuilder.supportInt32;
+            this.exportPaths = Collections.unmodifiableList(jcdkHandlerParameterBuilder.exportPaths);
+        }
 
         @Override
         public Path buildDirectory() {
